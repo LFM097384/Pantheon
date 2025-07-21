@@ -1,0 +1,619 @@
+{
+  "id": "pathfinder",
+  "name": "Pathfinder RPG",
+  "version": "1.0",
+  "description": "Pathfinder 角色扮演游戏规则系统",
+  "author": "Pantheon Team",
+  "characterSchema": {
+    "attributes": [
+      {
+        "id": "strength",
+        "name": "strength",
+        "displayName": "力量",
+        "type": "number",
+        "defaultValue": 10,
+        "min": 3,
+        "max": 25,
+        "category": "ability",
+        "description": "决定角色的物理力量和近战伤害"
+      },
+      {
+        "id": "dexterity",
+        "name": "dexterity",
+        "displayName": "敏捷",
+        "type": "number",
+        "defaultValue": 10,
+        "min": 3,
+        "max": 25,
+        "category": "ability",
+        "description": "决定角色的反应速度、AC和远程攻击"
+      },
+      {
+        "id": "constitution",
+        "name": "constitution",
+        "displayName": "体质",
+        "type": "number",
+        "defaultValue": 10,
+        "min": 3,
+        "max": 25,
+        "category": "ability",
+        "description": "决定角色的生命值和韧性"
+      },
+      {
+        "id": "intelligence",
+        "name": "intelligence",
+        "displayName": "智力",
+        "type": "number",
+        "defaultValue": 10,
+        "min": 3,
+        "max": 25,
+        "category": "ability",
+        "description": "决定角色的学习能力和知识技能"
+      },
+      {
+        "id": "wisdom",
+        "name": "wisdom",
+        "displayName": "感知",
+        "type": "number",
+        "defaultValue": 10,
+        "min": 3,
+        "max": 25,
+        "category": "ability",
+        "description": "决定角色的直觉和意志力"
+      },
+      {
+        "id": "charisma",
+        "name": "charisma",
+        "displayName": "魅力",
+        "type": "number",
+        "defaultValue": 10,
+        "min": 3,
+        "max": 25,
+        "category": "ability",
+        "description": "决定角色的领导力和社交能力"
+      },
+      {
+        "id": "level",
+        "name": "level",
+        "displayName": "等级",
+        "type": "number",
+        "defaultValue": 1,
+        "min": 1,
+        "max": 20,
+        "category": "basic",
+        "description": "角色的等级"
+      },
+      {
+        "id": "hitPoints",
+        "name": "hitPoints",
+        "displayName": "生命值",
+        "type": "number",
+        "defaultValue": 8,
+        "min": 1,
+        "category": "derived",
+        "description": "角色的生命值"
+      },
+      {
+        "id": "armorClass",
+        "name": "armorClass",
+        "displayName": "护甲等级",
+        "type": "number",
+        "defaultValue": 10,
+        "min": 0,
+        "max": 50,
+        "category": "derived",
+        "description": "角色的防御等级"
+      },
+      {
+        "id": "baseAttackBonus",
+        "name": "baseAttackBonus",
+        "displayName": "基础攻击加值",
+        "type": "number",
+        "defaultValue": 0,
+        "min": 0,
+        "max": 20,
+        "category": "derived",
+        "description": "角色的基础攻击加值"
+      },
+      {
+        "id": "fortitudeSave",
+        "name": "fortitudeSave",
+        "displayName": "强韧豁免",
+        "type": "number",
+        "defaultValue": 0,
+        "category": "derived",
+        "description": "对抗疾病、毒素等的豁免"
+      },
+      {
+        "id": "reflexSave",
+        "name": "reflexSave",
+        "displayName": "反射豁免",
+        "type": "number",
+        "defaultValue": 0,
+        "category": "derived",
+        "description": "对抗范围攻击等的豁免"
+      },
+      {
+        "id": "willSave",
+        "name": "willSave",
+        "displayName": "意志豁免",
+        "type": "number",
+        "defaultValue": 0,
+        "category": "derived",
+        "description": "对抗心理影响等的豁免"
+      },
+      {
+        "id": "strengthModifier",
+        "name": "strengthModifier",
+        "displayName": "力量调整值",
+        "type": "number",
+        "defaultValue": 0,
+        "category": "modifier",
+        "description": "力量属性调整值"
+      },
+      {
+        "id": "dexterityModifier",
+        "name": "dexterityModifier",
+        "displayName": "敏捷调整值",
+        "type": "number",
+        "defaultValue": 0,
+        "category": "modifier",
+        "description": "敏捷属性调整值"
+      },
+      {
+        "id": "constitutionModifier",
+        "name": "constitutionModifier",
+        "displayName": "体质调整值",
+        "type": "number",
+        "defaultValue": 0,
+        "category": "modifier",
+        "description": "体质属性调整值"
+      },
+      {
+        "id": "intelligenceModifier",
+        "name": "intelligenceModifier",
+        "displayName": "智力调整值",
+        "type": "number",
+        "defaultValue": 0,
+        "category": "modifier",
+        "description": "智力属性调整值"
+      },
+      {
+        "id": "wisdomModifier",
+        "name": "wisdomModifier",
+        "displayName": "感知调整值",
+        "type": "number",
+        "defaultValue": 0,
+        "category": "modifier",
+        "description": "感知属性调整值"
+      },
+      {
+        "id": "charismaModifier",
+        "name": "charismaModifier",
+        "displayName": "魅力调整值",
+        "type": "number",
+        "defaultValue": 0,
+        "category": "modifier",
+        "description": "魅力属性调整值"
+      }
+    ],
+    "skills": [
+      {
+        "id": "acrobatics",
+        "name": "acrobatics",
+        "displayName": "杂技",
+        "keyAbility": "dexterity",
+        "trainedOnly": false,
+        "armorCheckPenalty": true,
+        "category": "physical",
+        "description": "保持平衡、逃脱擒抱等"
+      },
+      {
+        "id": "bluff",
+        "name": "bluff",
+        "displayName": "唬骗",
+        "keyAbility": "charisma",
+        "trainedOnly": false,
+        "armorCheckPenalty": false,
+        "category": "social",
+        "description": "欺骗和误导他人"
+      },
+      {
+        "id": "climb",
+        "name": "climb",
+        "displayName": "攀爬",
+        "keyAbility": "strength",
+        "trainedOnly": false,
+        "armorCheckPenalty": true,
+        "category": "physical",
+        "description": "攀爬墙壁、绳索等"
+      },
+      {
+        "id": "diplomacy",
+        "name": "diplomacy",
+        "displayName": "交涉",
+        "keyAbility": "charisma",
+        "trainedOnly": false,
+        "armorCheckPenalty": false,
+        "category": "social",
+        "description": "通过谈判解决冲突"
+      },
+      {
+        "id": "disableDevice",
+        "name": "disableDevice",
+        "displayName": "解除装置",
+        "keyAbility": "dexterity",
+        "trainedOnly": true,
+        "armorCheckPenalty": true,
+        "category": "technical",
+        "description": "拆除陷阱和机关"
+      },
+      {
+        "id": "heal",
+        "name": "heal",
+        "displayName": "医疗",
+        "keyAbility": "wisdom",
+        "trainedOnly": false,
+        "armorCheckPenalty": false,
+        "category": "knowledge",
+        "description": "治疗伤势和疾病"
+      },
+      {
+        "id": "intimidate",
+        "name": "intimidate",
+        "displayName": "威吓",
+        "keyAbility": "charisma",
+        "trainedOnly": false,
+        "armorCheckPenalty": false,
+        "category": "social",
+        "description": "恐吓敌人或获取信息"
+      },
+      {
+        "id": "knowledge",
+        "name": "knowledge",
+        "displayName": "知识",
+        "keyAbility": "intelligence",
+        "trainedOnly": true,
+        "armorCheckPenalty": false,
+        "category": "knowledge",
+        "description": "学术知识和专业信息"
+      },
+      {
+        "id": "perception",
+        "name": "perception",
+        "displayName": "察觉",
+        "keyAbility": "wisdom",
+        "trainedOnly": false,
+        "armorCheckPenalty": false,
+        "category": "awareness",
+        "description": "注意到隐藏的物体或生物"
+      },
+      {
+        "id": "stealth",
+        "name": "stealth",
+        "displayName": "潜行",
+        "keyAbility": "dexterity",
+        "trainedOnly": false,
+        "armorCheckPenalty": true,
+        "category": "physical",
+        "description": "避免被发现"
+      }
+    ],
+    "customFields": [],
+    "equipmentSlots": []
+  },
+  "calculations": [
+    {
+      "id": "abilityModifier_strength",
+      "name": "力量调整值计算",
+      "targetField": "strengthModifier",
+      "formula": "Math.floor((strength - 10) / 2)",
+      "triggers": ["strength"],
+      "description": "计算力量调整值"
+    },
+    {
+      "id": "abilityModifier_dexterity",
+      "name": "敏捷调整值计算",
+      "targetField": "dexterityModifier",
+      "formula": "Math.floor((dexterity - 10) / 2)",
+      "triggers": ["dexterity"],
+      "description": "计算敏捷调整值"
+    },
+    {
+      "id": "abilityModifier_constitution",
+      "name": "体质调整值计算",
+      "targetField": "constitutionModifier",
+      "formula": "Math.floor((constitution - 10) / 2)",
+      "triggers": ["constitution"],
+      "description": "计算体质调整值"
+    },
+    {
+      "id": "abilityModifier_intelligence",
+      "name": "智力调整值计算",
+      "targetField": "intelligenceModifier",
+      "formula": "Math.floor((intelligence - 10) / 2)",
+      "triggers": ["intelligence"],
+      "description": "计算智力调整值"
+    },
+    {
+      "id": "abilityModifier_wisdom",
+      "name": "感知调整值计算",
+      "targetField": "wisdomModifier",
+      "formula": "Math.floor((wisdom - 10) / 2)",
+      "triggers": ["wisdom"],
+      "description": "计算感知调整值"
+    },
+    {
+      "id": "abilityModifier_charisma",
+      "name": "魅力调整值计算",
+      "targetField": "charismaModifier",
+      "formula": "Math.floor((charisma - 10) / 2)",
+      "triggers": ["charisma"],
+      "description": "计算魅力调整值"
+    },
+    {
+      "id": "hitPoints_calculation",
+      "name": "生命值计算",
+      "targetField": "hitPoints",
+      "formula": "(8 + constitutionModifier) + (level - 1) * (5 + constitutionModifier)",
+      "triggers": ["level", "constitutionModifier"],
+      "description": "计算生命值（假设d8生命骰）"
+    },
+    {
+      "id": "baseAttackBonus_calculation",
+      "name": "基础攻击加值计算",
+      "targetField": "baseAttackBonus",
+      "formula": "Math.floor(level * 3 / 4)",
+      "triggers": ["level"],
+      "description": "计算基础攻击加值（3/4 BAB职业）"
+    },
+    {
+      "id": "armorClass_calculation",
+      "name": "护甲等级计算",
+      "targetField": "armorClass",
+      "formula": "10 + dexterityModifier",
+      "triggers": ["dexterityModifier"],
+      "description": "计算护甲等级"
+    },
+    {
+      "id": "fortitudeSave_calculation",
+      "name": "强韧豁免计算",
+      "targetField": "fortitudeSave",
+      "formula": "Math.floor(level / 2) + constitutionModifier",
+      "triggers": ["level", "constitutionModifier"],
+      "description": "计算强韧豁免"
+    },
+    {
+      "id": "reflexSave_calculation",
+      "name": "反射豁免计算",
+      "targetField": "reflexSave",
+      "formula": "Math.floor(level / 3) + dexterityModifier",
+      "triggers": ["level", "dexterityModifier"],
+      "description": "计算反射豁免"
+    },
+    {
+      "id": "willSave_calculation",
+      "name": "意志豁免计算",
+      "targetField": "willSave",
+      "formula": "Math.floor(level / 2) + wisdomModifier",
+      "triggers": ["level", "wisdomModifier"],
+      "description": "计算意志豁免"
+    }
+  ],
+  "dependencies": [
+    {
+      "id": "strength_affects_modifier",
+      "name": "力量影响调整值",
+      "sourceField": "strength",
+      "targetField": "strengthModifier",
+      "type": "modify",
+      "rule": "Math.floor((value - 10) / 2)",
+      "description": "力量值变化时自动更新调整值"
+    },
+    {
+      "id": "dexterity_affects_modifier",
+      "name": "敏捷影响调整值",
+      "sourceField": "dexterity",
+      "targetField": "dexterityModifier",
+      "type": "modify",
+      "rule": "Math.floor((value - 10) / 2)",
+      "description": "敏捷值变化时自动更新调整值"
+    },
+    {
+      "id": "constitution_affects_modifier",
+      "name": "体质影响调整值",
+      "sourceField": "constitution",
+      "targetField": "constitutionModifier",
+      "type": "modify",
+      "rule": "Math.floor((value - 10) / 2)",
+      "description": "体质值变化时自动更新调整值"
+    },
+    {
+      "id": "intelligence_affects_modifier",
+      "name": "智力影响调整值",
+      "sourceField": "intelligence",
+      "targetField": "intelligenceModifier",
+      "type": "modify",
+      "rule": "Math.floor((value - 10) / 2)",
+      "description": "智力值变化时自动更新调整值"
+    },
+    {
+      "id": "wisdom_affects_modifier",
+      "name": "感知影响调整值",
+      "sourceField": "wisdom",
+      "targetField": "wisdomModifier",
+      "type": "modify",
+      "rule": "Math.floor((value - 10) / 2)",
+      "description": "感知值变化时自动更新调整值"
+    },
+    {
+      "id": "charisma_affects_modifier",
+      "name": "魅力影响调整值",
+      "sourceField": "charisma",
+      "targetField": "charismaModifier",
+      "type": "modify",
+      "rule": "Math.floor((value - 10) / 2)",
+      "description": "魅力值变化时自动更新调整值"
+    }
+  ],
+  "validations": [
+    {
+      "id": "strength_range",
+      "name": "力量值范围验证",
+      "field": "strength",
+      "type": "range",
+      "rule": "value >= 3 && value <= 25",
+      "message": "力量值必须在3-25之间",
+      "severity": "error"
+    },
+    {
+      "id": "dexterity_range",
+      "name": "敏捷值范围验证",
+      "field": "dexterity",
+      "type": "range",
+      "rule": "value >= 3 && value <= 25",
+      "message": "敏捷值必须在3-25之间",
+      "severity": "error"
+    },
+    {
+      "id": "constitution_range",
+      "name": "体质值范围验证",
+      "field": "constitution",
+      "type": "range",
+      "rule": "value >= 3 && value <= 25",
+      "message": "体质值必须在3-25之间",
+      "severity": "error"
+    },
+    {
+      "id": "intelligence_range",
+      "name": "智力值范围验证",
+      "field": "intelligence",
+      "type": "range",
+      "rule": "value >= 3 && value <= 25",
+      "message": "智力值必须在3-25之间",
+      "severity": "error"
+    },
+    {
+      "id": "wisdom_range",
+      "name": "感知值范围验证",
+      "field": "wisdom",
+      "type": "range",
+      "rule": "value >= 3 && value <= 25",
+      "message": "感知值必须在3-25之间",
+      "severity": "error"
+    },
+    {
+      "id": "charisma_range",
+      "name": "魅力值范围验证",
+      "field": "charisma",
+      "type": "range",
+      "rule": "value >= 3 && value <= 25",
+      "message": "魅力值必须在3-25之间",
+      "severity": "error"
+    },
+    {
+      "id": "level_range",
+      "name": "等级范围验证",
+      "field": "level",
+      "type": "range",
+      "rule": "value >= 1 && value <= 20",
+      "message": "等级必须在1-20之间",
+      "severity": "error"
+    },
+    {
+      "id": "hitPoints_positive",
+      "name": "生命值正数验证",
+      "field": "hitPoints",
+      "type": "custom",
+      "rule": "value > 0",
+      "message": "生命值必须大于0",
+      "severity": "error"
+    }
+  ],
+  "ui": {
+    "layout": {
+      "type": "tabs"
+    },
+    "tabs": [
+      {
+        "id": "basic",
+        "title": "基本信息",
+        "icon": "user",
+        "order": 1
+      },
+      {
+        "id": "abilities",
+        "title": "属性值",
+        "icon": "trending-up",
+        "order": 2
+      },
+      {
+        "id": "combat",
+        "title": "战斗",
+        "icon": "zap",
+        "order": 3
+      },
+      {
+        "id": "skills",
+        "title": "技能",
+        "icon": "book",
+        "order": 4
+      }
+    ],
+    "fieldGroups": [
+      {
+        "id": "basic_info",
+        "title": "基本信息",
+        "tab": "basic",
+        "order": 1,
+        "layout": "grid",
+        "columns": 2,
+        "fields": ["level"]
+      },
+      {
+        "id": "ability_scores",
+        "title": "属性值",
+        "tab": "abilities",
+        "order": 1,
+        "layout": "grid",
+        "columns": 3,
+        "fields": ["strength", "dexterity", "constitution", "intelligence", "wisdom", "charisma"]
+      },
+      {
+        "id": "ability_modifiers",
+        "title": "属性调整值",
+        "tab": "abilities",
+        "order": 2,
+        "layout": "grid",
+        "columns": 3,
+        "fields": ["strengthModifier", "dexterityModifier", "constitutionModifier", "intelligenceModifier", "wisdomModifier", "charismaModifier"]
+      },
+      {
+        "id": "derived_stats",
+        "title": "衍生属性",
+        "tab": "combat",
+        "order": 1,
+        "layout": "grid",
+        "columns": 2,
+        "fields": ["hitPoints", "armorClass", "baseAttackBonus"]
+      },
+      {
+        "id": "saving_throws",
+        "title": "豁免检定",
+        "tab": "combat",
+        "order": 2,
+        "layout": "grid",
+        "columns": 3,
+        "fields": ["fortitudeSave", "reflexSave", "willSave"]
+      },
+      {
+        "id": "skills_list",
+        "title": "技能列表",
+        "tab": "skills",
+        "order": 1,
+        "layout": "list",
+        "fields": ["acrobatics", "bluff", "climb", "diplomacy", "disableDevice", "heal", "intimidate", "knowledge", "perception", "stealth"]
+      }
+    ]
+  }
+}
