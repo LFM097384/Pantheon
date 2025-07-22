@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PF规则实时计算测试</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .section {
+            margin-bottom: 20px;
+            padding: 15px;
+            border: 1px solid #e0e0e0;
+            border-radius: 6px;
+        }
+        .section h3 {
+            margin-top: 0;
+            color: #1890ff;
+            border-bottom: 2px solid #1890ff;
+            padding-bottom: 5px;
+        }
+        .attribute-row, .skill-row {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+            gap: 10px;
+        }
+        .attribute-row label, .skill-row label {
+            min-width: 100px;
+            font-weight: bold;
+        }
+        .attribute-row input, .skill-row input, .skill-row select {
+            padding: 5px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        .modifier {
+            font-weight: bold;
+            color: #52c41a;
+            min-width: 60px;
+            text-align: center;
+        }
+        .modifier.negative {
+            color: #ff4d4f;
+        }
+        .skill-total {
+            font-weight: bold;
+            font-size: 16px;
+            color: #1890ff;
+            min-width: 80px;
+            text-align: center;
+            background: #f0f8ff;
+            padding: 5px;
+            border-radius: 4px;
+        }
+        .test-instructions {
+            background: #fff7e6;
+            border: 1px solid #ffd591;
+            padding: 15px;
+            border-radius: 6px;
+            margin-bottom: 20px;
+        }
+        .breakdown {
+            font-size: 12px;
+            color: #666;
+            margin-left: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>PF规则实时计算测试</h1>
+        
+        <div class="test-instructions">
+            <h4>测试说明：</h4>
+            <ol>
+                <li>修改基础属性值，观察属性修正值是否立即更新</li>
+                <li>修改技能的受训等级，观察技能总修正是否立即更新</li>
+                <li>修改技能点数，观察技能总修正是否立即更新</li>
+                <li>所有计算应该实时显示，无需刷新页面</li>
+            </ol>
+        </div>
+
+        <div class="section">
+            <h3>基础属性</h3>
+            <div class="attribute-row">
+                <label>力量 (STR):</label>
+                <input type="number" id="strength" min="1" max="30" value="10" onchange="updateAttributes()">
+                <span class="modifier" id="strengthMod">+0</span>
+            </div>
+            <div class="attribute-row">
+                <label>敏捷 (DEX):</label>
+                <input type="number" id="dexterity" min="1" max="30" value="10" onchange="updateAttributes()">
+                <span class="modifier" id="dexterityMod">+0</span>
+            </div>
+            <div class="attribute-row">
+                <label>体质 (CON):</label>
+                <input type="number" id="constitution" min="1" max="30" value="10" onchange="updateAttributes()">
+                <span class="modifier" id="constitutionMod">+0</span>
+            </div>
+            <div class="attribute-row">
+                <label>智力 (INT):</label>
+                <input type="number" id="intelligence" min="1" max="30" value="10" onchange="updateAttributes()">
+                <span class="modifier" id="intelligenceMod">+0</span>
+            </div>
+            <div class="attribute-row">
+                <label>感知 (WIS):</label>
+                <input type="number" id="wisdom" min="1" max="30" value="10" onchange="updateAttributes()">
+                <span class="modifier" id="wisdomMod">+0</span>
+            </div>
+            <div class="attribute-row">
+                <label>魅力 (CHA):</label>
+                <input type="number" id="charisma" min="1" max="30" value="10" onchange="updateAttributes()">
+                <span class="modifier" id="charismaMod">+0</span>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3>技能 (基于敏捷)</h3>
+            <div class="skill-row">
+                <label>杂技 (Acrobatics):</label>
+                <select id="acrobaticsProficiency" onchange="updateSkills()">
+                    <option value="0">未受训 (+0)</option>
+                    <option value="2">受训 (+2)</option>
+                    <option value="4">专家 (+4)</option>
+                    <option value="6">大师 (+6)</option>
+                    <option value="8">传奇 (+8)</option>
+                </select>
+                <input type="number" id="acrobaticsRanks" min="0" max="20" value="0" onchange="updateSkills()" placeholder="技能点">
+                <span class="skill-total" id="acrobaticsTotal">+0</span>
+                <span class="breakdown" id="acrobaticsBreakdown">(敏捷+0 + 受训+0 + 技能点+0)</span>
+            </div>
+            
+            <div class="skill-row">
+                <label>潜行 (Stealth):</label>
+                <select id="stealthProficiency" onchange="updateSkills()">
+                    <option value="0">未受训 (+0)</option>
+                    <option value="2">受训 (+2)</option>
+                    <option value="4">专家 (+4)</option>
+                    <option value="6">大师 (+6)</option>
+                    <option value="8">传奇 (+8)</option>
+                </select>
+                <input type="number" id="stealthRanks" min="0" max="20" value="0" onchange="updateSkills()" placeholder="技能点">
+                <span class="skill-total" id="stealthTotal">+0</span>
+                <span class="breakdown" id="stealthBreakdown">(敏捷+0 + 受训+0 + 技能点+0)</span>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3>技能 (基于智力)</h3>
+            <div class="skill-row">
+                <label>奥法 (Arcana):</label>
+                <select id="arcanaProficiency" onchange="updateSkills()">
+                    <option value="0">未受训 (+0)</option>
+                    <option value="2">受训 (+2)</option>
+                    <option value="4">专家 (+4)</option>
+                    <option value="6">大师 (+6)</option>
+                    <option value="8">传奇 (+8)</option>
+                </select>
+                <input type="number" id="arcanaRanks" min="0" max="20" value="0" onchange="updateSkills()" placeholder="技能点">
+                <span class="skill-total" id="arcanaTotal">+0</span>
+                <span class="breakdown" id="arcanaBreakdown">(智力+0 + 受训+0 + 技能点+0)</span>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 计算属性修正值
+        function calculateModifier(value) {
+            return Math.floor((value - 10) / 2);
+        }
+
+        // 更新属性修正值
+        function updateAttributes() {
+            const attributes = ['strength', 'dexterity', 'constitution', 'intelligence', 'wisdom', 'charisma'];
+            
+            attributes.forEach(attr => {
+                const value = parseInt(document.getElementById(attr).value) || 10;
+                const modifier = calculateModifier(value);
+                const modElement = document.getElementById(attr + 'Mod');
+                
+                modElement.textContent = (modifier >= 0 ? '+' : '') + modifier;
+                modElement.className = modifier >= 0 ? 'modifier' : 'modifier negative';
+            });
+            
+            // 属性变化后，技能也需要重新计算
+            updateSkills();
+        }
+
+        // 更新技能总修正
+        function updateSkills() {
+            // 杂技和潜行基于敏捷
+            const dexMod = calculateModifier(parseInt(document.getElementById('dexterity').value) || 10);
+            
+            // 奥法基于智力
+            const intMod = calculateModifier(parseInt(document.getElementById('intelligence').value) || 10);
+            
+            // 更新杂技
+            updateSkill('acrobatics', dexMod, '敏捷');
+            
+            // 更新潜行
+            updateSkill('stealth', dexMod, '敏捷');
+            
+            // 更新奥法
+            updateSkill('arcana', intMod, '智力');
+        }
+
+        function updateSkill(skillName, attributeMod, attributeName) {
+            const proficiencyBonus = parseInt(document.getElementById(skillName + 'Proficiency').value) || 0;
+            const skillRanks = parseInt(document.getElementById(skillName + 'Ranks').value) || 0;
+            
+            const total = attributeMod + proficiencyBonus + skillRanks;
+            
+            const totalElement = document.getElementById(skillName + 'Total');
+            totalElement.textContent = (total >= 0 ? '+' : '') + total;
+            
+            const breakdownElement = document.getElementById(skillName + 'Breakdown');
+            breakdownElement.textContent = `(${attributeName}${attributeMod >= 0 ? '+' : ''}${attributeMod} + 受训+${proficiencyBonus} + 技能点+${skillRanks})`;
+        }
+
+        // 页面加载时初始化
+        window.onload = function() {
+            updateAttributes();
+            updateSkills();
+        };
+    </script>
+</body>
+</html>

@@ -1,0 +1,106 @@
+{
+  "classes": {
+    "fighter": {
+      "id": "fighter",
+      "name": "战士",
+      "nameEn": "Fighter",
+      "description": "训练有素的武者，精通各种武器和战术",
+      "hitDie": 10,
+      "primaryAbility": ["strength", "dexterity"],
+      "savingThrowProficiencies": ["fortitude", "reflex"],
+      "skillProficiencies": 2,
+      "armorProficiencies": ["light", "medium", "heavy", "shields"],
+      "weaponProficiencies": ["simple", "martial"],
+      "classFeatures": {
+        "1": [
+          {
+            "name": "战斗风格",
+            "description": "选择一种战斗风格获得额外能力"
+          }
+        ]
+      }
+    },
+    "wizard": {
+      "id": "wizard",
+      "name": "法师",
+      "nameEn": "Wizard",
+      "description": "通过学习掌握奥术魔法的施法者",
+      "hitDie": 6,
+      "primaryAbility": ["intelligence"],
+      "savingThrowProficiencies": ["will"],
+      "skillProficiencies": 2,
+      "armorProficiencies": [],
+      "weaponProficiencies": ["simple"],
+      "spellcasting": {
+        "ability": "intelligence",
+        "type": "prepared",
+        "spellsKnown": "all"
+      },
+      "classFeatures": {
+        "1": [
+          {
+            "name": "法术书",
+            "description": "记录已知法术的法术书"
+          },
+          {
+            "name": "奥术学派",
+            "description": "选择专精的魔法学派"
+          }
+        ]
+      }
+    },
+    "rogue": {
+      "id": "rogue",
+      "name": "游荡者",
+      "nameEn": "Rogue",
+      "description": "擅长潜行和精准打击的灵活战士",
+      "hitDie": 8,
+      "primaryAbility": ["dexterity"],
+      "savingThrowProficiencies": ["reflex", "will"],
+      "skillProficiencies": 8,
+      "armorProficiencies": ["light"],
+      "weaponProficiencies": ["simple", "rapier", "shortbow", "shortsword"],
+      "classFeatures": {
+        "1": [
+          {
+            "name": "偷袭",
+            "description": "在合适条件下造成额外伤害"
+          },
+          {
+            "name": "盗贼技艺",
+            "description": "获得额外的技能专长"
+          }
+        ]
+      }
+    },
+    "cleric": {
+      "id": "cleric",
+      "name": "牧师",
+      "nameEn": "Cleric",
+      "description": "侍奉神祇的神术施法者",
+      "hitDie": 8,
+      "primaryAbility": ["wisdom"],
+      "savingThrowProficiencies": ["fortitude", "will"],
+      "skillProficiencies": 2,
+      "armorProficiencies": ["light", "medium", "shields"],
+      "weaponProficiencies": ["simple"],
+      "spellcasting": {
+        "ability": "wisdom",
+        "type": "prepared",
+        "spellsKnown": "all"
+      },
+      "classFeatures": {
+        "1": [
+          {
+            "name": "引导神力",
+            "description": "使用神祇赐予的特殊能力"
+          },
+          {
+            "name": "神域",
+            "description": "选择神祇的神域获得额外能力"
+          }
+        ]
+      }
+    }
+  }
+}

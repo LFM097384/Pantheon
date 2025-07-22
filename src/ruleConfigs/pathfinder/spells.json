@@ -1,0 +1,121 @@
+{
+  "spells": {
+    "cantrips": {
+      "acid_splash": {
+        "id": "acid_splash",
+        "name": "酸液飞溅",
+        "nameEn": "Acid Splash",
+        "level": 0,
+        "school": "conjuration",
+        "castingTime": "action",
+        "range": "60 feet",
+        "components": ["V", "S"],
+        "duration": "instantaneous",
+        "description": "投掷一团酸液，对目标造成1d6点酸性伤害",
+        "scalingDamage": "1d6",
+        "savingThrow": "dexterity",
+        "spellAttack": true
+      },
+      "mage_hand": {
+        "id": "mage_hand",
+        "name": "法师之手",
+        "nameEn": "Mage Hand",
+        "level": 0,
+        "school": "transmutation",
+        "castingTime": "action",
+        "range": "30 feet",
+        "components": ["V", "S"],
+        "duration": "1 minute",
+        "description": "创造一只魔法之手，可以操纵轻型物品",
+        "concentration": false
+      },
+      "prestidigitation": {
+        "id": "prestidigitation",
+        "name": "戏法",
+        "nameEn": "Prestidigitation",
+        "level": 0,
+        "school": "transmutation",
+        "castingTime": "action",
+        "range": "10 feet",
+        "components": ["V", "S"],
+        "duration": "1 hour",
+        "description": "产生各种无害的魔法效果",
+        "concentration": false
+      }
+    },
+    "level1": {
+      "magic_missile": {
+        "id": "magic_missile",
+        "name": "魔法飞弹",
+        "nameEn": "Magic Missile",
+        "level": 1,
+        "school": "evocation",
+        "castingTime": "action",
+        "range": "120 feet",
+        "components": ["V", "S"],
+        "duration": "instantaneous",
+        "description": "发射3枚魔法飞弹，每枚造成1d4+1点力场伤害",
+        "scalingDamage": "1d4+1",
+        "autoHit": true
+      },
+      "cure_light_wounds": {
+        "id": "cure_light_wounds",
+        "name": "轻伤治疗",
+        "nameEn": "Cure Light Wounds",
+        "level": 1,
+        "school": "conjuration",
+        "castingTime": "action",
+        "range": "touch",
+        "components": ["V", "S"],
+        "duration": "instantaneous",
+        "description": "治疗1d8+施法者等级点生命值",
+        "scalingHealing": "1d8",
+        "touch": true
+      },
+      "shield": {
+        "id": "shield",
+        "name": "护盾术",
+        "nameEn": "Shield",
+        "level": 1,
+        "school": "abjuration",
+        "castingTime": "reaction",
+        "range": "self",
+        "components": ["V", "S"],
+        "duration": "1 round",
+        "description": "AC获得+4盾牌加值，免疫魔法飞弹",
+        "acBonus": 4
+      }
+    },
+    "level2": {
+      "web": {
+        "id": "web",
+        "name": "蛛网术",
+        "nameEn": "Web",
+        "level": 2,
+        "school": "conjuration",
+        "castingTime": "action",
+        "range": "60 feet",
+        "components": ["V", "S", "M"],
+        "duration": "concentration, up to 1 hour",
+        "description": "创造蛛网困住敌人",
+        "areaOfEffect": "20-foot cube",
+        "savingThrow": "dexterity",
+        "concentration": true
+      },
+      "invisibility": {
+        "id": "invisibility",
+        "name": "隐身术",
+        "nameEn": "Invisibility",
+        "level": 2,
+        "school": "illusion",
+        "castingTime": "action",
+        "range": "touch",
+        "components": ["V", "S", "M"],
+        "duration": "concentration, up to 1 hour",
+        "description": "使目标变为隐身",
+        "concentration": true,
+        "touch": true
+      }
+    }
+  }
+}

@@ -12,6 +12,8 @@ import DMLobby from './pages/DM/DMLobby'
 import PlayerLobby from './pages/Player/PlayerLobby'
 import GameRoom from './pages/GameRoom'
 import CharacterSheet from './pages/CharacterSheet'
+import SimpleCharacterSheet from './components/SimpleCharacterSheet'
+import CharacterManager from './components/CharacterManager'
 
 const { Content } = Layout
 
@@ -48,7 +50,9 @@ const App: React.FC = () => {
               <Route path="/dm/lobby" element={<DMLobby />} />
               <Route path="/player/lobby" element={<PlayerLobby />} />
               <Route path="/room/:roomId" element={<GameRoom />} />
-              <Route path="/character" element={<CharacterSheet />} />
+              <Route path="/character" element={<SimpleCharacterSheet />} />
+              <Route path="/character-manager" element={<CharacterManager />} />
+              <Route path="/character-old" element={<CharacterSheet />} />
               <Route path="/setup" element={<UserSetup />} />
             </Routes>
           </Content>

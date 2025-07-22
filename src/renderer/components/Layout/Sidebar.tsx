@@ -27,9 +27,9 @@ const Sidebar: React.FC = () => {
       label: '首页',
     },
     {
-      key: '/character',
+      key: '/character-manager',
       icon: <UserOutlined />,
-      label: '角色卡',
+      label: '角色管理',
     },
     ...(currentUser?.role === 'dm' ? [
       {

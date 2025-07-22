@@ -195,6 +195,208 @@
         "defaultValue": 0,
         "category": "modifier",
         "description": "魅力属性调整值"
+      },
+      {
+        "id": "currentHitPoints",
+        "name": "currentHitPoints",
+        "displayName": "当前生命值",
+        "type": "number",
+        "defaultValue": 8,
+        "category": "combat",
+        "description": "角色当前的生命值"
+      },
+      {
+        "id": "tempHitPoints",
+        "name": "tempHitPoints",
+        "displayName": "临时生命值",
+        "type": "number",
+        "defaultValue": 0,
+        "category": "combat",
+        "description": "临时生命值加成"
+      },
+      {
+        "id": "initiative",
+        "name": "initiative",
+        "displayName": "先攻",
+        "type": "number",
+        "defaultValue": 0,
+        "category": "combat",
+        "description": "战斗先攻值"
+      },
+      {
+        "id": "speed",
+        "name": "speed",
+        "displayName": "速度",
+        "type": "number",
+        "defaultValue": 30,
+        "category": "combat",
+        "description": "移动速度（英尺）"
+      },
+      {
+        "id": "touchAC",
+        "name": "touchAC",
+        "displayName": "接触AC",
+        "type": "number",
+        "defaultValue": 10,
+        "category": "combat",
+        "description": "接触护甲等级"
+      },
+      {
+        "id": "flatFootedAC",
+        "name": "flatFootedAC",
+        "displayName": "措手不及AC",
+        "type": "number",
+        "defaultValue": 10,
+        "category": "combat",
+        "description": "措手不及护甲等级"
+      },
+      {
+        "id": "combatManeuverBonus",
+        "name": "combatManeuverBonus",
+        "displayName": "战技加值",
+        "type": "number",
+        "defaultValue": 0,
+        "category": "combat",
+        "description": "战技攻击加值"
+      },
+      {
+        "id": "combatManeuverDefense",
+        "name": "combatManeuverDefense",
+        "displayName": "战技防御",
+        "type": "number",
+        "defaultValue": 10,
+        "category": "combat",
+        "description": "战技防御值"
+      },
+      {
+        "id": "characterName",
+        "name": "characterName",
+        "displayName": "角色姓名",
+        "type": "string",
+        "defaultValue": "",
+        "category": "identity",
+        "description": "角色的姓名"
+      },
+      {
+        "id": "playerName",
+        "name": "playerName",
+        "displayName": "玩家姓名",
+        "type": "string",
+        "defaultValue": "",
+        "category": "identity",
+        "description": "玩家的姓名"
+      },
+      {
+        "id": "characterClass",
+        "name": "characterClass",
+        "displayName": "职业",
+        "type": "string",
+        "defaultValue": "",
+        "category": "identity",
+        "description": "角色的职业"
+      },
+      {
+        "id": "race",
+        "name": "race",
+        "displayName": "种族",
+        "type": "string",
+        "defaultValue": "",
+        "category": "identity",
+        "description": "角色的种族"
+      },
+      {
+        "id": "alignment",
+        "name": "alignment",
+        "displayName": "阵营",
+        "type": "enum",
+        "defaultValue": "TN",
+        "enumValues": ["LG", "LN", "LE", "NG", "TN", "NE", "CG", "CN", "CE"],
+        "category": "identity",
+        "description": "角色的道德阵营"
+      },
+      {
+        "id": "deity",
+        "name": "deity",
+        "displayName": "信仰",
+        "type": "string",
+        "defaultValue": "",
+        "category": "identity",
+        "description": "角色信仰的神祇"
+      },
+      {
+        "id": "homeland",
+        "name": "homeland",
+        "displayName": "故乡",
+        "type": "string",
+        "defaultValue": "",
+        "category": "identity",
+        "description": "角色的故乡"
+      },
+      {
+        "id": "size",
+        "name": "size",
+        "displayName": "体型",
+        "type": "enum",
+        "defaultValue": "Medium",
+        "enumValues": ["Fine", "Diminutive", "Tiny", "Small", "Medium", "Large", "Huge", "Gargantuan", "Colossal"],
+        "category": "physical",
+        "description": "角色的体型大小"
+      },
+      {
+        "id": "age",
+        "name": "age",
+        "displayName": "年龄",
+        "type": "number",
+        "defaultValue": 20,
+        "min": 1,
+        "max": 1000,
+        "category": "physical",
+        "description": "角色的年龄"
+      },
+      {
+        "id": "gender",
+        "name": "gender",
+        "displayName": "性别",
+        "type": "string",
+        "defaultValue": "",
+        "category": "physical",
+        "description": "角色的性别"
+      },
+      {
+        "id": "height",
+        "name": "height",
+        "displayName": "身高",
+        "type": "string",
+        "defaultValue": "",
+        "category": "physical",
+        "description": "角色的身高"
+      },
+      {
+        "id": "weight",
+        "name": "weight",
+        "displayName": "体重",
+        "type": "string",
+        "defaultValue": "",
+        "category": "physical",
+        "description": "角色的体重"
+      },
+      {
+        "id": "hair",
+        "name": "hair",
+        "displayName": "发色",
+        "type": "string",
+        "defaultValue": "",
+        "category": "physical",
+        "description": "角色的发色"
+      },
+      {
+        "id": "eyes",
+        "name": "eyes",
+        "displayName": "瞳色",
+        "type": "string",
+        "defaultValue": "",
+        "category": "physical",
+        "description": "角色的瞳色"
       }
     ],
     "skills": [
@@ -297,6 +499,166 @@
         "armorCheckPenalty": true,
         "category": "physical",
         "description": "避免被发现"
+      },
+      {
+        "id": "appraise",
+        "name": "appraise",
+        "displayName": "估价",
+        "keyAbility": "intelligence",
+        "trainedOnly": false,
+        "armorCheckPenalty": false,
+        "category": "knowledge",
+        "description": "评估物品价值"
+      },
+      {
+        "id": "craft",
+        "name": "craft",
+        "displayName": "手艺",
+        "keyAbility": "intelligence",
+        "trainedOnly": false,
+        "armorCheckPenalty": false,
+        "category": "knowledge",
+        "description": "制作物品"
+      },
+      {
+        "id": "disguise",
+        "name": "disguise",
+        "displayName": "易容",
+        "keyAbility": "charisma",
+        "trainedOnly": false,
+        "armorCheckPenalty": false,
+        "category": "social",
+        "description": "改变外貌"
+      },
+      {
+        "id": "escapeArtist",
+        "name": "escapeArtist",
+        "displayName": "脱逃术",
+        "keyAbility": "dexterity",
+        "trainedOnly": false,
+        "armorCheckPenalty": true,
+        "category": "physical",
+        "description": "从束缚中逃脱"
+      },
+      {
+        "id": "fly",
+        "name": "fly",
+        "displayName": "飞行",
+        "keyAbility": "dexterity",
+        "trainedOnly": false,
+        "armorCheckPenalty": true,
+        "category": "physical",
+        "description": "控制飞行"
+      },
+      {
+        "id": "handleAnimal",
+        "name": "handleAnimal",
+        "displayName": "驯养动物",
+        "keyAbility": "charisma",
+        "trainedOnly": true,
+        "armorCheckPenalty": false,
+        "category": "social",
+        "description": "驯养和指挥动物"
+      },
+      {
+        "id": "linguistics",
+        "name": "linguistics",
+        "displayName": "语言学",
+        "keyAbility": "intelligence",
+        "trainedOnly": true,
+        "armorCheckPenalty": false,
+        "category": "knowledge",
+        "description": "学习语言和解密"
+      },
+      {
+        "id": "perform",
+        "name": "perform",
+        "displayName": "表演",
+        "keyAbility": "charisma",
+        "trainedOnly": false,
+        "armorCheckPenalty": false,
+        "category": "social",
+        "description": "各种表演技艺"
+      },
+      {
+        "id": "profession",
+        "name": "profession",
+        "displayName": "专业",
+        "keyAbility": "wisdom",
+        "trainedOnly": true,
+        "armorCheckPenalty": false,
+        "category": "knowledge",
+        "description": "专业技能"
+      },
+      {
+        "id": "ride",
+        "name": "ride",
+        "displayName": "骑术",
+        "keyAbility": "dexterity",
+        "trainedOnly": false,
+        "armorCheckPenalty": true,
+        "category": "physical",
+        "description": "骑乘坐骑"
+      },
+      {
+        "id": "senseMotive",
+        "name": "senseMotive",
+        "displayName": "察言观色",
+        "keyAbility": "wisdom",
+        "trainedOnly": false,
+        "armorCheckPenalty": false,
+        "category": "social",
+        "description": "察觉他人意图"
+      },
+      {
+        "id": "sleightOfHand",
+        "name": "sleightOfHand",
+        "displayName": "巧手",
+        "keyAbility": "dexterity",
+        "trainedOnly": true,
+        "armorCheckPenalty": true,
+        "category": "physical",
+        "description": "扒窃和巧手技巧"
+      },
+      {
+        "id": "spellcraft",
+        "name": "spellcraft",
+        "displayName": "法术辨识",
+        "keyAbility": "intelligence",
+        "trainedOnly": true,
+        "armorCheckPenalty": false,
+        "category": "knowledge",
+        "description": "识别和理解法术"
+      },
+      {
+        "id": "survival",
+        "name": "survival",
+        "displayName": "生存",
+        "keyAbility": "wisdom",
+        "trainedOnly": false,
+        "armorCheckPenalty": false,
+        "category": "knowledge",
+        "description": "野外生存技能"
+      },
+      {
+        "id": "swim",
+        "name": "swim",
+        "displayName": "游泳",
+        "keyAbility": "strength",
+        "trainedOnly": false,
+        "armorCheckPenalty": true,
+        "category": "physical",
+        "description": "在水中游泳"
+      },
+      {
+        "id": "useMagicDevice",
+        "name": "useMagicDevice",
+        "displayName": "使用魔法装置",
+        "keyAbility": "charisma",
+        "trainedOnly": true,
+        "armorCheckPenalty": false,
+        "category": "knowledge",
+        "description": "激活魔法物品"
       }
     ],
     "customFields": [],
@@ -306,7 +668,7 @@
     {
       "id": "abilityModifier_strength",
       "name": "力量调整值计算",
-      "targetField": "strengthModifier",
+      "targetField": "attributes.strengthModifier",
       "formula": "Math.floor((strength - 10) / 2)",
       "triggers": ["strength"],
       "description": "计算力量调整值"
@@ -314,7 +676,7 @@
     {
       "id": "abilityModifier_dexterity",
       "name": "敏捷调整值计算",
-      "targetField": "dexterityModifier",
+      "targetField": "attributes.dexterityModifier",
       "formula": "Math.floor((dexterity - 10) / 2)",
       "triggers": ["dexterity"],
       "description": "计算敏捷调整值"
@@ -322,7 +684,7 @@
     {
       "id": "abilityModifier_constitution",
       "name": "体质调整值计算",
-      "targetField": "constitutionModifier",
+      "targetField": "attributes.constitutionModifier",
       "formula": "Math.floor((constitution - 10) / 2)",
       "triggers": ["constitution"],
       "description": "计算体质调整值"
@@ -330,7 +692,7 @@
     {
       "id": "abilityModifier_intelligence",
       "name": "智力调整值计算",
-      "targetField": "intelligenceModifier",
+      "targetField": "attributes.intelligenceModifier",
       "formula": "Math.floor((intelligence - 10) / 2)",
       "triggers": ["intelligence"],
       "description": "计算智力调整值"
@@ -338,7 +700,7 @@
     {
       "id": "abilityModifier_wisdom",
       "name": "感知调整值计算",
-      "targetField": "wisdomModifier",
+      "targetField": "attributes.wisdomModifier",
       "formula": "Math.floor((wisdom - 10) / 2)",
       "triggers": ["wisdom"],
       "description": "计算感知调整值"
@@ -346,7 +708,7 @@
     {
       "id": "abilityModifier_charisma",
       "name": "魅力调整值计算",
-      "targetField": "charismaModifier",
+      "targetField": "attributes.charismaModifier",
       "formula": "Math.floor((charisma - 10) / 2)",
       "triggers": ["charisma"],
       "description": "计算魅力调整值"
@@ -354,7 +716,7 @@
     {
       "id": "hitPoints_calculation",
       "name": "生命值计算",
-      "targetField": "hitPoints",
+      "targetField": "attributes.hitPoints",
       "formula": "(8 + constitutionModifier) + (level - 1) * (5 + constitutionModifier)",
       "triggers": ["level", "constitutionModifier"],
       "description": "计算生命值（假设d8生命骰）"
@@ -362,7 +724,7 @@
     {
       "id": "baseAttackBonus_calculation",
       "name": "基础攻击加值计算",
-      "targetField": "baseAttackBonus",
+      "targetField": "attributes.baseAttackBonus",
       "formula": "Math.floor(level * 3 / 4)",
       "triggers": ["level"],
       "description": "计算基础攻击加值（3/4 BAB职业）"
@@ -370,7 +732,7 @@
     {
       "id": "armorClass_calculation",
       "name": "护甲等级计算",
-      "targetField": "armorClass",
+      "targetField": "attributes.armorClass",
       "formula": "10 + dexterityModifier",
       "triggers": ["dexterityModifier"],
       "description": "计算护甲等级"
@@ -378,7 +740,7 @@
     {
       "id": "fortitudeSave_calculation",
       "name": "强韧豁免计算",
-      "targetField": "fortitudeSave",
+      "targetField": "attributes.fortitudeSave",
       "formula": "Math.floor(level / 2) + constitutionModifier",
       "triggers": ["level", "constitutionModifier"],
       "description": "计算强韧豁免"
@@ -386,7 +748,7 @@
     {
       "id": "reflexSave_calculation",
       "name": "反射豁免计算",
-      "targetField": "reflexSave",
+      "targetField": "attributes.reflexSave",
       "formula": "Math.floor(level / 3) + dexterityModifier",
       "triggers": ["level", "dexterityModifier"],
       "description": "计算反射豁免"
@@ -394,10 +756,50 @@
     {
       "id": "willSave_calculation",
       "name": "意志豁免计算",
-      "targetField": "willSave",
+      "targetField": "attributes.willSave",
       "formula": "Math.floor(level / 2) + wisdomModifier",
       "triggers": ["level", "wisdomModifier"],
       "description": "计算意志豁免"
+    },
+    {
+      "id": "initiative_calculation",
+      "name": "先攻计算",
+      "targetField": "initiative",
+      "formula": "dexterityModifier",
+      "triggers": ["dexterityModifier"],
+      "description": "计算先攻值"
+    },
+    {
+      "id": "touchAC_calculation",
+      "name": "接触AC计算",
+      "targetField": "touchAC",
+      "formula": "10 + dexterityModifier",
+      "triggers": ["dexterityModifier"],
+      "description": "计算接触护甲等级"
+    },
+    {
+      "id": "flatFootedAC_calculation",
+      "name": "措手不及AC计算",
+      "targetField": "attributes.flatFootedAC",
+      "formula": "10",
+      "triggers": [],
+      "description": "计算措手不及护甲等级"
+    },
+    {
+      "id": "combatManeuverBonus_calculation",
+      "name": "战技加值计算",
+      "targetField": "attributes.combatManeuverBonus",
+      "formula": "baseAttackBonus + strengthModifier",
+      "triggers": ["baseAttackBonus", "strengthModifier"],
+      "description": "计算战技攻击加值"
+    },
+    {
+      "id": "combatManeuverDefense_calculation",
+      "name": "战技防御计算",
+      "targetField": "attributes.combatManeuverDefense",
+      "formula": "10 + baseAttackBonus + strengthModifier + dexterityModifier",
+      "triggers": ["baseAttackBonus", "strengthModifier", "dexterityModifier"],
+      "description": "计算战技防御值"
     }
   ],
   "dependencies": [

@@ -24,9 +24,9 @@ const HomePage: React.FC = () => {
     },
     {
       title: '角色管理',
-      description: '管理NPC和玩家角色',
+      description: '创建、编辑和管理角色',
       icon: <UserOutlined />,
-      action: () => navigate('/character'),
+      action: () => navigate('/character-manager'),
       color: '#13c2c2',
     },
   ] : [
@@ -39,9 +39,9 @@ const HomePage: React.FC = () => {
     },
     {
       title: '角色管理',
-      description: '创建和编辑你的角色',
+      description: '创建、编辑和管理角色',
       icon: <UserOutlined />,
-      action: () => navigate('/character'),
+      action: () => navigate('/character-manager'),
       color: '#13c2c2',
     },
   ]

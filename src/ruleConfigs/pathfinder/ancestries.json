@@ -1,0 +1,128 @@
+{
+  "ancestries": {
+    "human": {
+      "id": "human",
+      "name": "人类",
+      "nameEn": "Human",
+      "description": "适应性强、雄心勃勃的种族",
+      "size": "medium",
+      "speed": 30,
+      "languages": ["common"],
+      "traits": [
+        {
+          "name": "额外技能专长",
+          "description": "在1级时获得一个额外的通用专长"
+        },
+        {
+          "name": "额外技能",
+          "description": "获得额外的技能训练"
+        }
+      ],
+      "abilityBoosts": {
+        "free": 2,
+        "specific": []
+      },
+      "hitPoints": 8
+    },
+    "elf": {
+      "id": "elf",
+      "name": "精灵",
+      "nameEn": "Elf",
+      "description": "优雅、长寿且与魔法亲和的种族",
+      "size": "medium",
+      "speed": 30,
+      "languages": ["common", "elven"],
+      "traits": [
+        {
+          "name": "精灵武器熟练",
+          "description": "精通长剑、长弓等精灵武器"
+        },
+        {
+          "name": "敏锐感官",
+          "description": "察觉检定获得+2种族加值"
+        }
+      ],
+      "abilityBoosts": {
+        "free": 1,
+        "specific": ["dexterity", "intelligence"]
+      },
+      "abilityFlaws": ["constitution"],
+      "hitPoints": 6
+    },
+    "dwarf": {
+      "id": "dwarf",
+      "name": "矮人",
+      "nameEn": "Dwarf",
+      "description": "坚韧、勤劳且技艺精湛的种族",
+      "size": "medium",
+      "speed": 20,
+      "languages": ["common", "dwarven"],
+      "traits": [
+        {
+          "name": "矮人韧性",
+          "description": "对毒素和法术有天然抗性"
+        },
+        {
+          "name": "石匠直觉",
+          "description": "对石造建筑有特殊感知"
+        }
+      ],
+      "abilityBoosts": {
+        "free": 1,
+        "specific": ["constitution", "wisdom"]
+      },
+      "abilityFlaws": ["charisma"],
+      "hitPoints": 10
+    },
+    "halfling": {
+      "id": "halfling",
+      "name": "半身人",
+      "nameEn": "Halfling",
+      "description": "乐观、勇敢且幸运的小型种族",
+      "size": "small",
+      "speed": 25,
+      "languages": ["common", "halfling"],
+      "traits": [
+        {
+          "name": "半身人幸运",
+          "description": "可以重骰自然1的检定"
+        },
+        {
+          "name": "无畏",
+          "description": "对恐惧效应有抗性"
+        }
+      ],
+      "abilityBoosts": {
+        "free": 1,
+        "specific": ["dexterity", "wisdom"]
+      },
+      "abilityFlaws": ["strength"],
+      "hitPoints": 6
+    },
+    "gnome": {
+      "id": "gnome",
+      "name": "侏儒",
+      "nameEn": "Gnome",
+      "description": "小巧、充满好奇心且富有魔法天赋的种族",
+      "size": "small",
+      "speed": 25,
+      "languages": ["common", "gnomish", "sylvan"],
+      "traits": [
+        {
+          "name": "侏儒魔法",
+          "description": "拥有天生的魔法能力"
+        },
+        {
+          "name": "痴迷",
+          "description": "对特定领域有深度专精"
+        }
+      ],
+      "abilityBoosts": {
+        "free": 1,
+        "specific": ["constitution", "charisma"]
+      },
+      "abilityFlaws": ["strength"],
+      "hitPoints": 8
+    }
+  }
+}

@@ -28,10 +28,18 @@ export class RuleSystemManager {
     }
 
     try {
-      // 动态导入规则配置文件
-      const configPath = `../ruleConfigs/${ruleSystemId}.json`;
-      const config = await import(configPath);
-      const ruleSystemConfig: RuleSystemConfig = config.default || config;
+      let ruleSystemConfig: RuleSystemConfig;
+      
+      // 对于新的文件夹结构，加载核心配置
+      if (ruleSystemId === 'pathfinder') {
+        const coreConfig = await import(/* @vite-ignore */ `../ruleConfigs/pathfinder/core.json`);
+        ruleSystemConfig = (coreConfig.default || coreConfig) as unknown as RuleSystemConfig;
+      } else {
+        // 兜底：尝试加载旧格式的单文件配置
+        const configPath = `../ruleConfigs/${ruleSystemId}.json`;
+        const config = await import(/* @vite-ignore */ configPath);
+        ruleSystemConfig = config.default || config;
+      }
 
       // 验证配置文件格式
       this.validateRuleSystemConfig(ruleSystemConfig);

@@ -1,0 +1,368 @@
+{
+  "id": "pathfinder",
+  "name": "Pathfinder 2E",
+  "version": "1.0.0",
+  "description": "Pathfinder 2E 规则系统",
+  "author": "Paizo Inc.",
+  
+  "characterSchema": {
+    "attributes": [
+      {
+        "id": "name",
+        "name": "name",
+        "displayName": "角色名",
+        "type": "string",
+        "category": "identity",
+        "required": true,
+        "defaultValue": ""
+      },
+      {
+        "id": "level",
+        "name": "level",
+        "displayName": "等级",
+        "type": "number",
+        "category": "identity",
+        "min": 1,
+        "max": 20,
+        "defaultValue": 1
+      },
+      {
+        "id": "ancestry",
+        "name": "ancestry",
+        "displayName": "族裔",
+        "type": "string",
+        "category": "identity",
+        "defaultValue": ""
+      },
+      {
+        "id": "class",
+        "name": "class",
+        "displayName": "职业",
+        "type": "string",
+        "category": "identity",
+        "defaultValue": ""
+      },
+      {
+        "id": "strength",
+        "name": "strength",
+        "displayName": "力量",
+        "type": "number",
+        "category": "ability",
+        "min": 1,
+        "max": 30,
+        "defaultValue": 10
+      },
+      {
+        "id": "dexterity",
+        "name": "dexterity",
+        "displayName": "敏捷",
+        "type": "number",
+        "category": "ability",
+        "min": 1,
+        "max": 30,
+        "defaultValue": 10
+      },
+      {
+        "id": "constitution",
+        "name": "constitution",
+        "displayName": "体质",
+        "type": "number",
+        "category": "ability",
+        "min": 1,
+        "max": 30,
+        "defaultValue": 10
+      },
+      {
+        "id": "intelligence",
+        "name": "intelligence",
+        "displayName": "智力",
+        "type": "number",
+        "category": "ability",
+        "min": 1,
+        "max": 30,
+        "defaultValue": 10
+      },
+      {
+        "id": "wisdom",
+        "name": "wisdom",
+        "displayName": "感知",
+        "type": "number",
+        "category": "ability",
+        "min": 1,
+        "max": 30,
+        "defaultValue": 10
+      },
+      {
+        "id": "charisma",
+        "name": "charisma",
+        "displayName": "魅力",
+        "type": "number",
+        "category": "ability",
+        "min": 1,
+        "max": 30,
+        "defaultValue": 10
+      },
+      {
+        "id": "strengthModifier",
+        "name": "strengthModifier",
+        "displayName": "力量调整值",
+        "type": "number",
+        "category": "modifier",
+        "defaultValue": 0
+      },
+      {
+        "id": "dexterityModifier",
+        "name": "dexterityModifier",
+        "displayName": "敏捷调整值",
+        "type": "number",
+        "category": "modifier",
+        "defaultValue": 0
+      },
+      {
+        "id": "constitutionModifier",
+        "name": "constitutionModifier",
+        "displayName": "体质调整值",
+        "type": "number",
+        "category": "modifier",
+        "defaultValue": 0
+      },
+      {
+        "id": "intelligenceModifier",
+        "name": "intelligenceModifier",
+        "displayName": "智力调整值",
+        "type": "number",
+        "category": "modifier",
+        "defaultValue": 0
+      },
+      {
+        "id": "wisdomModifier",
+        "name": "wisdomModifier",
+        "displayName": "感知调整值",
+        "type": "number",
+        "category": "modifier",
+        "defaultValue": 0
+      },
+      {
+        "id": "charismaModifier",
+        "name": "charismaModifier",
+        "displayName": "魅力调整值",
+        "type": "number",
+        "category": "modifier",
+        "defaultValue": 0
+      },
+      {
+        "id": "armorClass",
+        "name": "armorClass",
+        "displayName": "护甲等级",
+        "type": "number",
+        "category": "combat",
+        "defaultValue": 10
+      },
+      {
+        "id": "hitPoints",
+        "name": "hitPoints",
+        "displayName": "生命值",
+        "type": "number",
+        "category": "combat",
+        "min": 0,
+        "defaultValue": 8
+      },
+      {
+        "id": "maxHitPoints",
+        "name": "maxHitPoints",
+        "displayName": "最大生命值",
+        "type": "number",
+        "category": "combat",
+        "defaultValue": 8
+      }
+    ],
+    
+    "skills": [
+      {
+        "id": "acrobatics",
+        "name": "acrobatics",
+        "displayName": "杂技",
+        "keyAbility": "dexterity",
+        "category": "physical",
+        "trainedOnly": false,
+        "description": "平衡、翻滚和灵活动作"
+      },
+      {
+        "id": "athletics",
+        "name": "athletics",
+        "displayName": "运动",
+        "keyAbility": "strength",
+        "category": "physical",
+        "trainedOnly": false,
+        "description": "攀爬、游泳和跳跃"
+      },
+      {
+        "id": "stealth",
+        "name": "stealth",
+        "displayName": "潜行",
+        "keyAbility": "dexterity",
+        "category": "physical",
+        "trainedOnly": false,
+        "description": "躲藏和无声移动"
+      },
+      {
+        "id": "arcana",
+        "name": "arcana",
+        "displayName": "奥法",
+        "keyAbility": "intelligence",
+        "category": "knowledge",
+        "trainedOnly": true,
+        "description": "魔法知识和法术识别"
+      },
+      {
+        "id": "medicine",
+        "name": "medicine",
+        "displayName": "医疗",
+        "keyAbility": "wisdom",
+        "category": "knowledge",
+        "trainedOnly": true,
+        "description": "治疗和医学知识"
+      },
+      {
+        "id": "perception",
+        "name": "perception",
+        "displayName": "察觉",
+        "keyAbility": "wisdom",
+        "category": "awareness",
+        "trainedOnly": false,
+        "description": "注意细节和发现隐藏事物"
+      },
+      {
+        "id": "persuasion",
+        "name": "persuasion",
+        "displayName": "说服",
+        "keyAbility": "charisma",
+        "category": "social",
+        "trainedOnly": false,
+        "description": "说服和影响他人"
+      },
+      {
+        "id": "deception",
+        "name": "deception",
+        "displayName": "欺骗",
+        "keyAbility": "charisma",
+        "category": "social",
+        "trainedOnly": false,
+        "description": "撒谎和误导他人"
+      }
+    ],
+    
+    "customFields": [],
+    
+    "equipmentSlots": [
+      {
+        "id": "head",
+        "name": "head",
+        "displayName": "头部",
+        "type": "single",
+        "allowedTypes": ["helmet", "hat"],
+        "category": "armor"
+      },
+      {
+        "id": "armor",
+        "name": "armor",
+        "displayName": "护甲",
+        "type": "single",
+        "allowedTypes": ["light_armor", "medium_armor", "heavy_armor"],
+        "category": "armor"
+      },
+      {
+        "id": "shield",
+        "name": "shield",
+        "displayName": "盾牌",
+        "type": "single",
+        "allowedTypes": ["shield"],
+        "category": "armor"
+      },
+      {
+        "id": "mainHand",
+        "name": "mainHand",
+        "displayName": "主手武器",
+        "type": "single",
+        "allowedTypes": ["weapon"],
+        "category": "weapon"
+      },
+      {
+        "id": "offHand",
+        "name": "offHand",
+        "displayName": "副手武器",
+        "type": "single",
+        "allowedTypes": ["weapon", "shield"],
+        "category": "weapon"
+      }
+    ]
+  },
+  
+  "calculations": [
+    {
+      "id": "strengthModifier",
+      "targetField": "attributes.strengthModifier",
+      "triggers": ["strength"],
+      "formula": "floor((strength - 10) / 2)",
+      "description": "力量调整值计算"
+    },
+    {
+      "id": "dexterityModifier",
+      "targetField": "attributes.dexterityModifier",
+      "triggers": ["dexterity"],
+      "formula": "floor((dexterity - 10) / 2)",
+      "description": "敏捷调整值计算"
+    },
+    {
+      "id": "constitutionModifier",
+      "targetField": "attributes.constitutionModifier",
+      "triggers": ["constitution"],
+      "formula": "floor((constitution - 10) / 2)",
+      "description": "体质调整值计算"
+    },
+    {
+      "id": "intelligenceModifier",
+      "targetField": "attributes.intelligenceModifier",
+      "triggers": ["intelligence"],
+      "formula": "floor((intelligence - 10) / 2)",
+      "description": "智力调整值计算"
+    },
+    {
+      "id": "wisdomModifier",
+      "targetField": "attributes.wisdomModifier",
+      "triggers": ["wisdom"],
+      "formula": "floor((wisdom - 10) / 2)",
+      "description": "感知调整值计算"
+    },
+    {
+      "id": "charismaModifier",
+      "targetField": "attributes.charismaModifier",
+      "triggers": ["charisma"],
+      "formula": "floor((charisma - 10) / 2)",
+      "description": "魅力调整值计算"
+    },
+    {
+      "id": "baseArmorClass",
+      "targetField": "attributes.armorClass",
+      "triggers": ["dexterityModifier"],
+      "formula": "10 + dexterityModifier",
+      "description": "基础护甲等级"
+    },
+    {
+      "id": "maxHitPoints",
+      "targetField": "attributes.maxHitPoints",
+      "triggers": ["constitutionModifier", "level"],
+      "formula": "8 + constitutionModifier + (level - 1) * (6 + constitutionModifier)",
+      "description": "最大生命值计算"
+    }
+  ],
+  
+  "dependencies": [],
+  
+  "validations": [],
+  
+  "ui": {
+    "theme": "default",
+    "layout": "tabs"
+  }
+}

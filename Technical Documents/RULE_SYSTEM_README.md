@@ -1,159 +1,254 @@
-# Pantheon 角色卡（车卡）规则系统
+# 多规则车卡系统架构说明
 
-## 项目概述
+## 概述
 
-本项目实现了一个可扩展的角色卡规则系统，支持不同的角色扮演游戏规则（如 Pathfinder、D&D 等）。系统通过配置文件开放规则接口，实现角色卡内部数据的联动和自动计算。
+Pantheon 众神殿的车卡系统采用了高度模块化和可扩展的架构设计，目前支持 Pathfinder RPG 规则，并为未来扩展其他规则系统（如 D&D 5e、Call of Cthulhu 等）预留了完整的接口。
 
 ## 系统架构
 
 ### 核心组件
 
-1. **规则系统类型定义** (`src/types/ruleSystem.ts`)
-   - 定义了规则系统的完整类型结构
-   - 包括属性定义、技能定义、计算规则、依赖规则、验证规则等
+1. **RuleSystemManager** (`src/utils/RuleSystemManager.ts`)
 
-2. **规则引擎** (`src/utils/RuleEngine.ts`)
-   - 负责角色数据的创建、更新、计算和验证
-   - 支持自动计算衍生属性和联动更新
+   - 规则系统的加载和管理
+   - 支持动态切换不同规则系统
+   - 提供规则系统的验证和字段查询功能
+2. **RuleEngine** (`src/utils/RuleEngine.ts`)
 
-3. **规则系统管理器** (`src/utils/RuleSystemManager.ts`)
-   - 管理不同规则系统的加载和切换
-   - 提供字段信息查询和分类功能
+   - 核心计算引擎
+   - 处理属性计算、技能修正、依赖关系等
+   - 角色数据的创建、更新和验证
+3. **CharacterDataManager** (`src/utils/CharacterDataManager.ts`)
 
-4. **规则配置文件** (`src/ruleConfigs/`)
-   - JSON 格式的规则配置文件
-   - 目前包含 Pathfinder 规则系统示例
+   - 角色数据的持久化存储
+   - 导入导出功能
+   - 数据备份和恢复
+4. **CharacterSheetManager** (`src/renderer/components/CharacterSheetManager.tsx`)
 
-## 主要特性
+   - 动态渲染角色卡界面
+   - 根据规则系统配置自动生成表单
+   - 实时计算和验证
 
-### 1. 可扩展的规则系统
-- 通过 JSON 配置文件定义不同的游戏规则
-- 支持属性、技能、装备、法术等各种游戏元素
-- 灵活的字段类型和分类系统
+### 数据流
 
-### 2. 自动计算和联动
-- 支持基于公式的自动计算（如属性调整值、生命值等）
-- 实现字段间的依赖关系和联动更新
-- 触发器机制确保相关数据同步更新
+```
+规则配置文件 → RuleSystemManager → RuleEngine → CharacterData
+                                      ↓
+              UI组件 ← CharacterSheetManager ← 计算结果
+                                      ↓
+              本地存储 ← CharacterDataManager ← 数据持久化
+```
 
-### 3. 数据验证
-- 灵活的验证规则系统
-- 支持范围验证、必填验证和自定义验证
-- 分级错误报告（错误、警告、信息）
+## 规则系统配置
 
-### 4. UI 配置支持
-- 支持布局配置（标签页、手风琴、单页等）
-- 字段分组和排序
-- 自定义显示样式和主题
+### 文件结构
 
-## Pathfinder 规则系统示例
+规则系统配置文件位于 `src/ruleConfigs/` 目录下，使用 JSON 格式。每个规则系统包含：
 
-### 属性系统
-- **基础属性**: 力量、敏捷、体质、智力、感知、魅力
-- **衍生属性**: 生命值、护甲等级、基础攻击加值、豁免检定
-- **调整值**: 自动计算的属性调整值
+- **基本信息**: id, name, version, description, author
+- **角色数据结构**: attributes, skills, customFields, equipmentSlots
+- **计算规则**: calculations 数组
+- **依赖关系**: dependencies 数组
+- **验证规则**: validations 数组
+- **UI配置**: ui 对象
 
-### 计算规则示例
+### Pathfinder 规则示例
+
 ```json
 {
-  "id": "abilityModifier_strength",
-  "name": "力量调整值计算",
-  "targetField": "strengthModifier",
-  "formula": "Math.floor((strength - 10) / 2)",
-  "triggers": ["strength"],
-  "description": "计算力量调整值"
+  "id": "pathfinder",
+  "name": "Pathfinder RPG",
+  "characterSchema": {
+    "attributes": [
+      {
+        "id": "strength",
+        "displayName": "力量",
+        "type": "number",
+        "category": "ability",
+        "min": 3,
+        "max": 25,
+        "defaultValue": 10
+      }
+    ],
+    "skills": [
+      {
+        "id": "acrobatics",
+        "displayName": "杂技",
+        "keyAbility": "dexterity",
+        "category": "physical",
+        "trainedOnly": false
+      }
+    ]
+  },
+  "calculations": [
+    {
+      "id": "abilityModifier_strength",
+      "targetField": "strengthModifier",
+      "formula": "Math.floor((strength - 10) / 2)",
+      "triggers": ["strength"]
+    }
+  ]
 }
 ```
 
-### 验证规则示例
-```json
-{
-  "id": "strength_range",
-  "name": "力量值范围验证",
-  "field": "strength",
-  "type": "range",
-  "rule": "value >= 3 && value <= 25",
-  "message": "力量值必须在3-25之间",
-  "severity": "error"
-}
+## 使用指南
+
+### 1. 启动系统
+
+车卡系统已集成到主页面中，通过以下方式访问：
+
+```tsx
+import CharacterSheet from './pages/CharacterSheet';
+
+// 在主应用中使用
+<CharacterSheet playerId="player1" />
 ```
 
-## 使用方法
+### 2. 创建新角色
 
-### 1. 加载规则系统
-```typescript
-import { ruleSystemManager } from './utils/RuleSystemManager';
+1. 在角色卡页面选择规则系统
+2. 点击"创建新角色"按钮
+3. 填写基本信息（姓名、职业、种族等）
+4. 系统自动生成符合规则的角色数据
 
-// 加载 Pathfinder 规则
-await ruleSystemManager.setCurrentRuleSystem('pathfinder');
-const ruleConfig = ruleSystemManager.getCurrentRuleSystem();
-```
+### 3. 编辑角色
 
-### 2. 创建和更新角色
-```typescript
-import { RuleEngine } from './utils/RuleEngine';
+1. 在角色库中选择要编辑的角色
+2. 系统自动加载对应的规则配置
+3. 修改属性值，系统实时计算衍生值
+4. 保存更改到本地存储
 
-const ruleEngine = new RuleEngine(ruleConfig);
+### 4. 数据管理
 
-// 创建角色
-const character = ruleEngine.createCharacter('player1', '测试角色');
-
-// 更新属性
-const updatedCharacter = ruleEngine.updateCharacter(
-  character, 
-  'attributes.strength', 
-  16
-);
-```
-
-### 3. 获取字段信息
-```typescript
-// 获取字段显示名称
-const displayName = ruleSystemManager.getFieldDisplayName('strength');
-
-// 获取字段描述
-const description = ruleSystemManager.getFieldDescription('strength');
-
-// 按类别获取字段
-const abilityFields = ruleSystemManager.getFieldsByCategory('ability');
-```
-
-## 测试验证
-
-已创建测试文件验证规则系统的正确性：
-
-- **简化测试** (`src/test/simpleRuleTest.js`): 基础功能验证
-- **完整测试** (`src/test/testPathfinderRules.ts`): TypeScript 完整测试
-
-测试结果显示：
-- ✅ 属性默认值设置正常
-- ✅ 自动计算公式工作正确
-- ✅ 数据验证规则有效
-- ✅ 字段联动机制正常
+- **导出**: 支持单个角色或批量导出为 JSON 文件
+- **导入**: 支持从 JSON 文件导入角色数据
+- **备份**: 所有数据自动保存到本地存储
 
 ## 扩展新规则系统
 
-要添加新的规则系统（如 D&D 5e），需要：
+### 1. 创建规则配置文件
 
-1. 在 `src/ruleConfigs/` 目录下创建新的 JSON 配置文件
-2. 定义该规则系统的属性、技能、计算规则等
-3. 通过 `ruleSystemManager.loadRuleSystem()` 加载使用
+在 `src/ruleConfigs/` 目录下创建新的 JSON 配置文件，例如 `dnd5e.json`:
 
-## 未来改进方向
+```json
+{
+  "id": "dnd5e",
+  "name": "D&D 5th Edition",
+  "version": "1.0",
+  "description": "D&D 5e 规则系统",
+  "author": "Pantheon Team",
+  "characterSchema": {
+    "attributes": [
+      // 定义 D&D 5e 的属性
+    ],
+    "skills": [
+      // 定义 D&D 5e 的技能
+    ]
+  },
+  "calculations": [
+    // 定义计算规则
+  ],
+  "validations": [
+    // 定义验证规则
+  ],
+  "ui": {
+    // 定义 UI 配置
+  }
+}
+```
 
-1. **前端集成**: 将规则系统与角色卡页面深度集成
-2. **规则编辑器**: 创建可视化的规则配置编辑工具
-3. **更多规则系统**: 添加更多主流 TRPG 规则支持
-4. **性能优化**: 优化大量计算和依赖解析的性能
-5. **规则验证**: 增强配置文件的结构验证和错误报告
+### 2. 更新系统注册
 
-## 技术栈
+在 `CharacterSheet.tsx` 中添加新规则系统到可用列表：
 
-- **TypeScript**: 类型安全的开发体验
-- **JSON 配置**: 灵活的规则定义格式
-- **模块化设计**: 清晰的代码组织结构
-- **单例模式**: 高效的资源管理
+```tsx
+const loadAvailableRuleSystems = async (): Promise<string[]> => {
+  return ['pathfinder', 'dnd5e']; // 添加新规则系统
+};
+```
 
----
+### 3. 测试新规则
 
-这个规则系统为 Pantheon 项目提供了强大而灵活的角色卡管理能力，支持各种 TRPG 规则的快速集成和定制。
+系统会自动加载新规则配置，无需修改其他代码。
+
+## 技术特性
+
+### 动态计算系统
+
+- 支持复杂的公式计算
+- 自动处理字段依赖关系
+- 实时更新衍生值
+
+### 类型安全
+
+- 完整的 TypeScript 类型定义
+- 编译时类型检查
+- 运行时数据验证
+
+### 模块化设计
+
+- 松耦合的组件架构
+- 可插拔的规则系统
+- 易于测试和维护
+
+### 性能优化
+
+- 增量计算避免不必要的重复计算
+- 本地存储缓存提高响应速度
+- 延迟加载减少初始化时间
+
+## 文件目录结构
+
+```
+src/
+├── types/
+│   └── ruleSystem.ts          # 类型定义
+├── utils/
+│   ├── RuleSystemManager.ts   # 规则系统管理
+│   ├── RuleEngine.ts          # 计算引擎
+│   └── CharacterDataManager.ts # 数据管理
+├── ruleConfigs/
+│   └── pathfinder.json        # PF规则配置
+├── renderer/
+│   ├── components/
+│   │   └── CharacterSheetManager.tsx # 角色卡组件
+│   └── pages/
+│       ├── CharacterSheet.tsx  # 主入口页面
+│       └── CharacterLibrary.tsx # 角色库页面
+```
+
+## 未来规划
+
+1. **更多规则系统支持**
+
+   - D&D 5th Edition
+   - Call of Cthulhu
+   - World of Darkness
+   - 自定义规则系统
+2. **高级功能**
+
+   - 法术系统集成
+   - 装备管理
+   - 战斗计算器
+   - 自动升级
+3. **协作功能**
+
+   - 多人共享角色卡
+   - 实时同步
+   - GM管理工具
+4. **扩展性**
+
+   - 插件系统
+   - 自定义组件
+   - 主题定制
+
+## 开发者注意事项
+
+- 所有新规则系统都必须符合 `RuleSystemConfig` 接口
+- 计算公式必须是安全的 JavaScript 表达式
+- UI 配置应该考虑不同规则系统的差异
+- 数据迁移和向后兼容性需要特别注意
+
+## 联系方式
+
+如有问题或建议，请联系开发团队或在项目仓库中提交 Issue。

@@ -50,7 +50,7 @@ export interface AttributeDefinition {
   min?: number
   max?: number
   enumValues?: string[]
-  category: 'core' | 'derived' | 'resource' | 'combat' | 'custom'
+  category: 'core' | 'derived' | 'resource' | 'combat' | 'custom' | 'ability' | 'basic' | 'modifier' | 'identity' | 'physical'
   description?: string
   formula?: string // 如果是派生属性，定义计算公式
 }
@@ -60,9 +60,10 @@ export interface SkillDefinition {
   id: string
   name: string
   displayName: string
-  baseAttribute: string // 关联的基础属性
+  keyAbility: string // 关联的核心属性
   category: string
-  canTrain: boolean // 是否可以训练
+  trainedOnly: boolean // 是否只能受训使用
+  armorCheckPenalty?: boolean // 是否受护甲检定减值影响
   defaultTrained?: boolean
   description?: string
 }
@@ -197,8 +198,12 @@ export interface CharacterData {
   playerId: string
 }
 
+// 技能受训等级
+export type ProficiencyLevel = 'untrained' | 'trained' | 'expert' | 'master' | 'legendary'
+
 export interface SkillValue {
-  trained: boolean
+  trained: boolean // 兼容性保留
+  proficiencyLevel: ProficiencyLevel // 新的受训等级
   modifier: number
   totalModifier: number // 包含属性加成的总修正
 }
@@ -237,4 +242,16 @@ export interface CalculationContext {
   round: (value: number) => number
   min: (...values: number[]) => number
   max: (...values: number[]) => number
+}
+
+// 计算详情类型（用于调试）
+export interface CalculationDetails {
+  ruleName: string
+  targetField: string
+  formula: string
+  variables: Record<string, any>
+  currentValue: any
+  calculatedValue: any
+  isUpToDate: boolean
+  error?: string
 }
