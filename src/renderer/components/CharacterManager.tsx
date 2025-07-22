@@ -68,6 +68,41 @@ interface SimpleCharacterData {
   shieldMaxHP?: number;
   shieldCurrentHP?: number;
   shieldBT?: number;
+  // 技能熟练度
+  acrobaticsProficiency?: number;
+  arcanaProficiency?: number;
+  athleticsProficiency?: number;
+  craftingProficiency?: number;
+  deceptionProficiency?: number;
+  diplomacyProficiency?: number;
+  intimidationProficiency?: number;
+  medicineProficiency?: number;
+  natureProficiency?: number;
+  occultismProficiency?: number;
+  performanceProficiency?: number;
+  religionProficiency?: number;
+  societyProficiency?: number;
+  stealthProficiency?: number;
+  survivalProficiency?: number;
+  thieveryProficiency?: number;
+  customSkillsProficiency?: number[];
+  customSkillsNames?: string[];
+  customSkillsAttributes?: string[];
+  // 豁免检定熟练度
+  fortitudeProficiency?: number;
+  reflexProficiency?: number;
+  willProficiency?: number;
+  // 基础数据默认值
+  speed?: number;                // 默认速度
+  perceptionProficiency?: number; // 察觉默认未受训
+  perceptionItem?: number;        // 察觉物品加值默认为0
+  // 扩展生命值数据
+  temporaryHitPoints?: number;
+  dyingValue?: number;
+  // 抗性和免疫
+  resistances?: string;
+  immunities?: string;
+  conditions?: string;
 }
 
 const CharacterManager: React.FC = () => {
@@ -80,6 +115,7 @@ const CharacterManager: React.FC = () => {
 
   // 从本地存储加载角色列表
   const loadCharacters = () => {
+    console.log('加载角色列表...');
     try {
       const keys = Object.keys(localStorage).filter(key => key.startsWith('pf_character_'));
       const characterList: SimpleCharacterData[] = [];
@@ -173,7 +209,42 @@ const CharacterManager: React.FC = () => {
         shieldHardness: 0,
         shieldMaxHP: 0,
         shieldCurrentHP: 0,
-        shieldBT: 0
+        shieldBT: 0,
+        // 技能熟练度默认值（未受训）
+        acrobaticsProficiency: 0,
+        arcanaProficiency: 0,
+        athleticsProficiency: 0,
+        craftingProficiency: 0,
+        deceptionProficiency: 0,
+        diplomacyProficiency: 0,
+        intimidationProficiency: 0,
+        medicineProficiency: 0,
+        natureProficiency: 0,
+        occultismProficiency: 0,
+        performanceProficiency: 0,
+        religionProficiency: 0,
+        societyProficiency: 0,
+        stealthProficiency: 0,
+        survivalProficiency: 0,
+        thieveryProficiency: 0,
+        customSkillsProficiency: [],
+        customSkillsNames: [],
+        customSkillsAttributes: [],
+        // 豁免检定熟练度默认值
+        fortitudeProficiency: 2,
+        reflexProficiency: 2,
+        willProficiency: 0,
+        // 基础数据默认值
+        speed: 25,                // 默认速度
+        perceptionProficiency: 0, // 察觉默认未受训
+        perceptionItem: 0,        // 察觉物品加值默认为0
+        // 扩展生命值数据
+        temporaryHitPoints: 0,
+        dyingValue: 0,
+        // 抗性和免疫
+        resistances: '',
+        immunities: '',
+        conditions: ''
       };
 
       // 保存到本地存储
@@ -500,21 +571,48 @@ const CharacterManager: React.FC = () => {
                   <UserOutlined style={{ marginRight: '8px' }} />
                   角色管理
                 </Title>
+                <Text type="secondary">
+                  当前共 {characters.length} 个角色
+                </Text>
               </Col>
               <Col>
                 <Space>
+                  {/* 测试按钮 - 仅用于开发 */}
                   <Button
-                    icon={<UploadOutlined />}
-                    onClick={() => setShowImportModal(true)}
+                    type="dashed"
+                    onClick={() => {
+                      const testCharacter: SimpleCharacterData = {
+                        id: `test_${Date.now()}`,
+                        name: '测试角色',
+                        level: 1,
+                        ancestry: 'human',
+                        class: 'fighter',
+                        ruleSystem: 'pathfinder',
+                        createdAt: new Date().toISOString(),
+                        updatedAt: new Date().toISOString(),
+                        stats: {
+                          strength: 10,
+                          dexterity: 10,
+                          constitution: 10,
+                          intelligence: 10,
+                          wisdom: 10,
+                          charisma: 10,
+                          hitPoints: 8,
+                          maxHitPoints: 8,
+                          armorClass: 10
+                        },
+                        customSkillsNames: [],
+                        customSkillsAttributes: [],
+                        customSkillsProficiency: []
+                      };
+                      
+                      const newCharacters = [...characters, testCharacter];
+                      setCharacters(newCharacters);
+                      localStorage.setItem('characters', JSON.stringify(newCharacters));
+                      message.success('测试角色已创建');
+                    }}
                   >
-                    导入角色
-                  </Button>
-                  <Button
-                    icon={<DownloadOutlined />}
-                    onClick={handleExportAll}
-                    disabled={characters.length === 0}
-                  >
-                    导出所有
+                    创建测试角色
                   </Button>
                   <Button
                     type="primary"

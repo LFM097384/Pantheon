@@ -1,0 +1,434 @@
+{
+  "generalFeats": [
+    {
+      "id": "toughness",
+      "name": "健壮",
+      "englishName": "Toughness",
+      "level": 1,
+      "type": "通用",
+      "traits": ["通用"],
+      "prerequisites": "",
+      "description": "你的生命值上限增加，数值等于你的等级。",
+      "source": "PC",
+      "rarity": "标准",
+      "effects": [
+        {
+          "type": "bonus",
+          "target": "hitPoints",
+          "value": "level",
+          "condition": "level"
+        }
+      ]
+    },
+    {
+      "id": "fast_recovery",
+      "name": "快速恢复",
+      "englishName": "Fast Recovery",
+      "level": 1,
+      "type": "通用",
+      "traits": ["通用"],
+      "prerequisites": "体质+2",
+      "description": "你的身体能更快地从伤害和疾病中恢复。",
+      "source": "PC",
+      "rarity": "标准"
+    },
+    {
+      "id": "incredible_initiative",
+      "name": "惊奇先攻",
+      "englishName": "Incredible Initiative",
+      "level": 1,
+      "type": "通用",
+      "traits": ["通用"],
+      "prerequisites": "",
+      "description": "你的先攻检定获得+2环境加值。",
+      "source": "PC",
+      "rarity": "标准",
+      "effects": [
+        {
+          "type": "bonus",
+          "target": "initiative",
+          "value": 2
+        }
+      ]
+    },
+    {
+      "id": "canny_acumen",
+      "name": "审时度势",
+      "englishName": "Canny Acumen",
+      "level": 1,
+      "type": "通用",
+      "traits": ["通用"],
+      "prerequisites": "",
+      "description": "你的感官异常敏锐。选择察觉、强韧豁免、反射豁免或意志豁免。你在选择的检定上的熟练度提升一级。",
+      "source": "PC",
+      "rarity": "标准",
+      "effects": [
+        {
+          "type": "proficiency",
+          "target": "perception",
+          "value": 2,
+          "condition": "choice"
+        }
+      ]
+    },
+    {
+      "id": "weapon_proficiency",
+      "name": "武器擅长",
+      "englishName": "Weapon Proficiency",
+      "level": 1,
+      "type": "通用",
+      "traits": ["通用"],
+      "prerequisites": "",
+      "description": "你学会使用某种武器。选择一种武器组。你在该武器组的所有武器上获得受训熟练度。",
+      "source": "PC",
+      "rarity": "标准"
+    },
+    {
+      "id": "shield_block",
+      "name": "盾牌格挡",
+      "englishName": "Shield Block",
+      "level": 1,
+      "type": "通用",
+      "traits": ["通用"],
+      "prerequisites": "",
+      "description": "**反应** 你举起盾牌抵挡即将到来的攻击。你的盾牌阻止等同于其硬度的伤害。盾牌承受剩余的伤害。",
+      "source": "PC",
+      "rarity": "标准",
+      "action": "反应"
+    },
+    {
+      "id": "armor_proficiency",
+      "name": "护甲擅长",
+      "englishName": "Armor Proficiency",
+      "level": 1,
+      "type": "通用",
+      "traits": ["通用"],
+      "prerequisites": "",
+      "description": "你学会穿戴某种护甲。选择轻甲、中甲或重甲。你在选择的护甲类别上获得受训熟练度。",
+      "source": "PC",
+      "rarity": "标准"
+    },
+    {
+      "id": "fleet",
+      "name": "飞跑",
+      "englishName": "Fleet",
+      "level": 1,
+      "type": "通用",
+      "traits": ["通用"],
+      "prerequisites": "",
+      "description": "你的速度增加5尺。",
+      "source": "PC",
+      "rarity": "标准",
+      "effects": [
+        {
+          "type": "bonus",
+          "target": "speed",
+          "value": 5
+        }
+      ]
+    },
+    {
+      "id": "adopted_ancestry",
+      "name": "异族情谊",
+      "englishName": "Adopted Ancestry",
+      "level": 1,
+      "type": "通用",
+      "traits": ["通用"],
+      "prerequisites": "",
+      "description": "你与某个族裔关系密切，已学会他们的方式。选择一个常见的族裔。你获得对该族裔所有成员的接触权，并可选择该族裔的族裔专长。",
+      "source": "PC",
+      "rarity": "标准"
+    },
+    {
+      "id": "diehard",
+      "name": "顽强",
+      "englishName": "Diehard",
+      "level": 1,
+      "type": "通用",
+      "traits": ["通用"],
+      "prerequisites": "",
+      "description": "在濒死状态下更难死亡。你的濒死状态值在达到濒死4而非濒死4死亡。",
+      "source": "PC",
+      "rarity": "标准",
+      "effects": [
+        {
+          "type": "bonus",
+          "target": "dyingThreshold",
+          "value": 1
+        }
+      ]
+    },
+    {
+      "id": "breath_control",
+      "name": "龟息",
+      "englishName": "Breath Control",
+      "level": 1,
+      "type": "通用",
+      "traits": ["通用"],
+      "prerequisites": "",
+      "description": "你能屏住呼吸的时间是正常时间的25倍。",
+      "source": "PC",
+      "rarity": "标准"
+    },
+    {
+      "id": "ride",
+      "name": "骁骑手",
+      "englishName": "Ride",
+      "level": 1,
+      "type": "通用",
+      "traits": ["通用", "技能"],
+      "prerequisites": "",
+      "description": "你擅长骑乘各种坐骑。你在所有骑术检定上获得+1环境加值。",
+      "source": "PC",
+      "rarity": "标准"
+    },
+    {
+      "id": "feather_step",
+      "name": "轻羽步",
+      "englishName": "Feather Step",
+      "level": 1,
+      "type": "通用",
+      "traits": ["通用"],
+      "prerequisites": "敏捷+2",
+      "description": "你的步伐如羽毛般轻盈。你在杂技检定上获得+2环境加值来保持平衡或在狭窄表面上移动。",
+      "source": "PC",
+      "rarity": "标准",
+      "effects": [
+        {
+          "type": "bonus",
+          "target": "acrobatics",
+          "value": 2
+        }
+      ]
+    },
+    {
+      "id": "improvised_repair",
+      "name": "临时修理",
+      "englishName": "Improvised Repair",
+      "level": 3,
+      "type": "通用",
+      "traits": ["通用"],
+      "prerequisites": "",
+      "description": "你能用手头材料临时修复损坏的物品。",
+      "source": "PC2",
+      "rarity": "标准",
+      "action": "3动作"
+    },
+    {
+      "id": "prescient_planner",
+      "name": "未雨绸缪",
+      "englishName": "Prescient Planner",
+      "level": 3,
+      "type": "通用",
+      "traits": ["通用"],
+      "prerequisites": "",
+      "description": "你总是为意外情况做好准备。你可以花费1动作从背包中取出一件你'忘记购买'但能负担得起的普通物品。",
+      "source": "PC",
+      "rarity": "标准"
+    },
+    {
+      "id": "thorough_search",
+      "name": "地毯式搜查",
+      "englishName": "Thorough Search",
+      "level": 3,
+      "type": "通用",
+      "traits": ["通用"],
+      "prerequisites": "察觉专家",
+      "description": "你在搜索时更加仔细彻底。当你花费2动作搜索一个区域时，你搜索的区域是正常的两倍。",
+      "source": "PC2",
+      "rarity": "标准"
+    },
+    {
+      "id": "robust_health",
+      "name": "坚韧体魄",
+      "englishName": "Robust Health",
+      "level": 3,
+      "type": "通用",
+      "traits": ["通用"],
+      "prerequisites": "",
+      "description": "你的身体对疾病有很强的抵抗力。你在对抗疾病的强韧豁免上获得+1环境加值。",
+      "source": "PC2",
+      "rarity": "标准",
+      "effects": [
+        {
+          "type": "bonus",
+          "target": "fortitude",
+          "value": 1,
+          "condition": "disease"
+        }
+      ]
+    },
+    {
+      "id": "pick_up_pace",
+      "name": "加快步伐",
+      "englishName": "Pick Up the Pace",
+      "level": 3,
+      "type": "通用",
+      "traits": ["通用"],
+      "prerequisites": "体质+2",
+      "description": "你能够帮助队友加快移动速度。",
+      "source": "PC2",
+      "rarity": "标准"
+    },
+    {
+      "id": "untrained_improvisation",
+      "name": "即兴发挥",
+      "englishName": "Untrained Improvisation",
+      "level": 3,
+      "type": "通用",
+      "traits": ["通用"],
+      "prerequisites": "",
+      "description": "你在未受训的检定上不再受到-2减值，而是获得等于你等级一半的加值（最低+1）。",
+      "source": "PC",
+      "rarity": "标准",
+      "effects": [
+        {
+          "type": "bonus",
+          "target": "untrainedSkills",
+          "value": "halfLevel",
+          "condition": "untrained"
+        }
+      ]
+    },
+    {
+      "id": "keen_follower",
+      "name": "完美跟随",
+      "englishName": "Keen Follower",
+      "level": 3,
+      "type": "通用",
+      "traits": ["通用"],
+      "prerequisites": "",
+      "description": "你在跟随队友方面表现出色。",
+      "source": "PC2",
+      "rarity": "标准"
+    },
+    {
+      "id": "ancestral_paragon",
+      "name": "族裔典范",
+      "englishName": "Ancestral Paragon",
+      "level": 3,
+      "type": "通用",
+      "traits": ["通用"],
+      "prerequisites": "",
+      "description": "你进一步发展了自己族裔的特色能力。你获得一个你族裔的1级族裔专长。",
+      "source": "PC",
+      "rarity": "标准"
+    },
+    {
+      "id": "expeditious_search",
+      "name": "迅速搜寻",
+      "englishName": "Expeditious Search",
+      "level": 7,
+      "type": "通用",
+      "traits": ["通用"],
+      "prerequisites": "察觉的技能大师",
+      "description": "你搜索的速度比其他人快得多。你可以用1动作搜索，覆盖的区域是正常搜索的一半。",
+      "source": "PC",
+      "rarity": "标准"
+    },
+    {
+      "id": "supertaster",
+      "name": "神之舌",
+      "englishName": "Supertaster",
+      "level": 7,
+      "type": "通用",
+      "traits": ["通用"],
+      "prerequisites": "察觉大师",
+      "description": "你的味觉和嗅觉异常敏锐。",
+      "source": "PC2",
+      "rarity": "标准"
+    },
+    {
+      "id": "numb_to_death",
+      "name": "无动于死",
+      "englishName": "Numb to Death",
+      "level": 7,
+      "type": "通用",
+      "traits": ["通用"],
+      "prerequisites": "顽强，你至少经历过一次死亡",
+      "description": "你对死亡已经麻木。当你濒死时，你可以继续行动而不会因濒死状态而失去意识。",
+      "source": "PC2",
+      "rarity": "标准"
+    },
+    {
+      "id": "prescient_consumable",
+      "name": "有备无患",
+      "englishName": "Prescient Consumable",
+      "level": 7,
+      "type": "通用",
+      "traits": ["通用"],
+      "prerequisites": "未雨绸缪",
+      "description": "你不仅为物品做好准备，还为消耗品做好准备。",
+      "source": "PC",
+      "rarity": "标准"
+    },
+    {
+      "id": "incredible_investiture",
+      "name": "额外绑定",
+      "englishName": "Incredible Investiture",
+      "level": 11,
+      "type": "通用",
+      "traits": ["通用"],
+      "prerequisites": "魅力+3",
+      "description": "你可以绑定更多魔法物品。你的绑定物品数量上限增加1。",
+      "source": "PC",
+      "rarity": "标准"
+    },
+    {
+      "id": "caravan_leader",
+      "name": "带头大哥",
+      "englishName": "Caravan Leader",
+      "level": 11,
+      "type": "通用",
+      "traits": ["通用"],
+      "prerequisites": "加快步伐",
+      "description": "你天生就是队伍的领导者。",
+      "source": "PC2",
+      "rarity": "标准"
+    },
+    {
+      "id": "home_in_every_port",
+      "name": "百家饭",
+      "englishName": "A Home In Every Port",
+      "level": 11,
+      "type": "通用",
+      "traits": ["休整", "通用"],
+      "prerequisites": "魅力+3",
+      "description": "你在各地都有朋友。",
+      "source": "PC2",
+      "rarity": "标准"
+    },
+    {
+      "id": "incredible_scout",
+      "name": "大侦查兵",
+      "englishName": "Incredible Scout",
+      "level": 11,
+      "type": "通用",
+      "traits": ["探索", "通用"],
+      "prerequisites": "察觉大师",
+      "description": "你是出色的侦察员。",
+      "source": "PC2",
+      "rarity": "标准"
+    },
+    {
+      "id": "true_perception",
+      "name": "真实视野",
+      "englishName": "True Perception",
+      "level": 19,
+      "type": "通用",
+      "traits": ["通用", "揭示"],
+      "prerequisites": "察觉传奇",
+      "description": "你的感知能力达到了超自然的程度。",
+      "source": "PC2",
+      "rarity": "标准"
+    }
+  ],
+  "featTypes": [
+    "通用",
+    "职业",
+    "族裔",
+    "技能",
+    "法术",
+    "原型"
+  ]
+}
